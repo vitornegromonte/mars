@@ -1,0 +1,27 @@
+#config.yaml
+
+arxiv:
+  query: "cat:cs.CV"
+  max_results: 1000
+  sort_by: "submittedDate"
+  sort_order: "descending"
+  start: 0
+
+model:
+  model: "Qwen/Qwen2.5-7B-Instruct"
+  temperature: 0.9
+  top_k: 50
+  top_p: 0.9
+  num_return_sequences: 1
+
+email:
+  sender: "your_name@mail.com"
+  recipient: "recipient_mail@mail.com"
+  subject: "👋 New Arxiv Paper"
+  smtp_server: "smtp.mail.com"
+  smtp_port: 587
+  password: "password"
+
+scheduler:
+  time: "00:00"
+  timezone: "UTC"
