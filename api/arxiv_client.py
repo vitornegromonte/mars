@@ -1,10 +1,11 @@
 import arxiv
 
-def get_papers(query, max_results=100):
+def get_papers(topic, max_results=100):
   Client = arxiv.Search(
-    query = query,
+    query = topic,
     max_results = max_results,
     sort_by = arxiv.SortCriterion.SubmittedDate
+    
   )
   
   papers = []

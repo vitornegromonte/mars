@@ -2,9 +2,9 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-def send_email(papers, recipient_email):
-    sender_email = "your_email@example.com"
-    password = "your_password"
+def send_email(papers, sender_email, password, recipient_email):
+    sender_email = sender_email
+    password = password
 
     msg = MIMEMultipart('alternative')
     msg['Subject'] = "Recommended Research Papers"
