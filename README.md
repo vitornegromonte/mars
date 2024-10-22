@@ -1,1 +1,2 @@
-# projectA
+# MARS - Multi Agent Recommendation System
+
