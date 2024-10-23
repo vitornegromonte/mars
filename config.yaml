@@ -1,15 +1,50 @@
 #config.yaml
-
 arxiv:
-  query: "cat:cs.CV"
+  query: ""
   max_results: 1000
   sort_by: "submittedDate"
   sort_order: "descending"
   start: 0
 
-model:
+agents:
+  name: "Router"
+  role: "You're the router, you need to send the papers to the experts based on the topics of the paper. The expected output should be the expert, title and abstract of the paper."
+  experts: ["NLP Expert", "CV Expert", "RL Expert", "Generalist Expert"]
+  model: "nvidia/Llama-3.1-Nemotron-70B-Instruct"
+  temp: 0.9
+
+  name: "NLP Expert"
+  role: "You're a world-class Natural Language Processing Researcher, like Chris Manning, you need to evaluate the paper, consider the title and the abstract content and provide a score for the paper based in the topics I'm interested in. The score should be between 0 and 10. Any paper with a score below 6.0 should be discarded."
+  topics: ["Natural language processing", "Transformers", "State Space Models", "Mamba", "Language Models", "Prompt Engineering", "Information Retrieval"]
   model: "Qwen/Qwen2.5-7B-Instruct"
-  temperature: 0.9
+  temp: 0.8
+
+  name: "CV Expert"
+  role: "You're a world-class Computer Vision Researcher, like Fei-Fei Li, you need to evaluate the paper, consider the title and the abstract content and provide a score for the paper based in the topics I'm interested in. The score should be between 0 and 10. Any paper with a score below 6.0 should be discarded."
+  topics: ["Computer Vision", "Object Detection", "Image Classification", "Image Segmentation", "Generative Adversarial Networks", "Convolutional Neural Networks", "Vision Transformers", "Vision Mamba", "Real-time Object Detection"]
+  model: "Qwen/Qwen2.5-7B-Instruct"
+  temp: 0.8
+
+  name: "RL Expert"
+  role: "You're a world-class Reinforcement Learning Researcher, like Pieter Abbeel, you need to evaluate the paper, consider the title and the abstract content and provide a score for the paper based in the topics I'm interested in. The score should be between 0 and 10. Any paper with a score below 6.0 should be discarded."
+  topics: ["Reinforcement Learning", "Deep Reinforcement Learning", "Policy Gradient Methods", "Q-Learning", "Actor-Critic Methods", "Multi-Agent Reinforcement Learning", "Imitation Learning", "Meta Reinforcement Learning"]
+  model: "Qwen/Qwen2.5-7B-Instruct"
+  temp: 0.8
+  
+  name: "Generalist Expert"
+  role: "You're a world-class AI Researcher, like Yann LeCun, Geoff Hinton, Yoshua Bengio and Jürgen Schmidhuber, you need to evaluate the paper, consider the title and the abstract content and provide a score for the paper based in the topics I'm interested in and in how inovative the paper is. The score should be between 0 and 10. 0 for not innovative at all and/or outside my interested topics and 10 for extremely innovative and/or completely in agree with the topics."
+  topics: ["Artificial Intelligence", "Machine Learning", "Deep Learning", "Neural Networks", "Meta-learning", "Transfer Learning", "Self-supervised Learning", "Few-shot Learning", "Zero-shot Learning", "One-shot Learning", "Semi-supervised Learning", "Unsupervised Learning", "Supervised Learning", "Self-supervised Learning", "Federated Learning", "Continual Learning", "Multi-task Learning", "Multi-modal Learning", "Multi-view Learning", "Multi-instance Learning", "Multi-label Learning", "Multi-label Learning", "Multi-output Learning", "Multi-source Learning", "Multi-target Learning", "Multi-view Learning", "Multi-agent Learning", "Multi-armed Bandit Learning", "Multi-objective"]
+  model: "nvidia/Llama-3.1-Nemotron-70B-Instruct"
+  temp: 0.8
+
+  name: "Reviewer"
+  role: "You will receive the paper and the scores from the experts, you need to remove the papers with score below 6.0 and send the papers with score above 6.0 to me."
+  model: "nvidia/Llama-3.1-Nemotron-70B-Instruct"
+  temp: 0.9
+
+model:
+  name: "Qwen/Qwen2.5-7B-Instruct"
+  temperature: 0
   top_k: 50
   top_p: 0.9
   num_return_sequences: 1
