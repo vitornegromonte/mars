@@ -1,4 +1,3 @@
-@tool
 def arxiv_search(topic: str, max_results: int = 100) -> list:
   """ Collects papers from arXiv based on a given topic. 
   
@@ -31,7 +30,6 @@ def arxiv_search(topic: str, max_results: int = 100) -> list:
       
   return papers
 
-@tool
 def store_papers(papers: list) -> None:
   """
   Stores the papers in a database.
@@ -46,8 +44,6 @@ def store_papers(papers: list) -> None:
   
   pass
 
-# Check the papers in the database to see if they are already present or not, if they are not present, store them, and then return the papers
-@tool
 def papers_filter (papers: list) -> list:
   """
   Filters the papers to check if they are already present in the database. If not, stores them in the database.
