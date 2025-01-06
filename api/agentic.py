@@ -4,8 +4,10 @@ import os
 import time
 from litellm import completion
 from litellm.exceptions import RateLimitError
+from dotenv import load_dotenv
 
-os.environ['GEMINI_API_KEY'] = GEMINI_API_KEY
+load_dotenv()  # Load environment variables from .env file
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 def analyze_and_tag(text):
     messages = [
@@ -58,7 +60,8 @@ def evaluate_paper(text, topic):
                 model="gemini/gemini-exp-1206",
                 messages=messages,
                 response_format={"type": "json_object"},
-                topK=1
+                topK=1,
+                temperature=0.2,
             )
             score = response.choices[0].message.content.strip()
             try:

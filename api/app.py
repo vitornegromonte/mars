@@ -1,5 +1,6 @@
 from arxiv_search import get_papers
-from agentic import analyze_and_tag evaluate_paper
+from agentic import analyze_and_tag 
+from agentic import evaluate_paper
 import json
 import os
 import time
