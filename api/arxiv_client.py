@@ -1,4 +1,5 @@
 import arxiv
+import time
 
 def get_papers(topic, max_results=100):
   Client = arxiv.Search(
@@ -24,10 +25,12 @@ def get_papers(topic, max_results=100):
 
 # Test the function
 if __name__ == "__main__":
+    strt = time.time()
     query = "machine learning"
-    max_results = 5
+    max_results = 2
     papers = get_papers(query, max_results)
     
+    end = time.time()
     for i, paper in enumerate(papers, 1):
         print(f"Paper {i}:")
         print(f"Title: {paper['title']}")
@@ -36,3 +39,5 @@ if __name__ == "__main__":
         print(f"Summary: {paper['summary']}.")  # Print first 500 chars of summary
         print(f"Link: {paper['url']}")
         print("\n" + "-"*80 + "\n")
+    print(f"Time taken to get {max_results} papers: {end - strt:.2f} seconds.")
+    print(type(papers[0]))
